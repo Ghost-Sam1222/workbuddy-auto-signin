@@ -24,7 +24,7 @@ def main():
                            input=value.encode(), check=True,
                            stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
         print('两个 Secrets 已保存；没有落地明文文件，也没有启用定时签到。')
-        print('请先启用 WB_SIGNIN_ENABLED=true，并手动运行 check_only=true 验证。')
+        print('请手动运行 check_only=true 验证，无需启用 WB_SIGNIN_ENABLED。')
         print('重新授权时须先处理旧 workbuddy-state 分支，详见 CLOUD_ACTIONS.md。')
         return 0
     except Exception:

@@ -10,7 +10,7 @@
 - 后续运行读取轮换后的会话；不依赖旧刷新令牌始终有效，也不需要个人 PAT 回写 Secrets。`GITHUB_TOKEN` 只要求当前仓库 `contents: write`，用于加密状态分支。
 - 全仓库串行运行，不取消正在续期的运行。保存失败时停止，不继续签到。
 - 只调用原版 `run_auto` 签到流程，不调用成长中心、抽奖或模型；输出只保留固定结果枚举与数字积分。
-- 默认关闭：需要仓库变量 `WB_SIGNIN_ENABLED=true` 才执行；只允许默认分支执行。
+- 默认关闭领取：需要仓库变量 `WB_SIGNIN_ENABLED=true` 才能领取；默认分支允许不启用该变量直接手动查询。
 
 ## 首次配置
 
@@ -24,7 +24,7 @@ python3 -m venv .venv
 
 Windows 将解释器路径替换为 `.venv\Scripts\python.exe`。该命令会打开官方浏览器页面，登录完成后直接通过标准输入写入两个 Secrets，不需要复制 token，也不创建明文授权文件。执行它意味着同意把这份新授权交由 GitHub Actions 托管。
 
-在 GitHub 仓库 Settings → Secrets and variables → Actions → Variables 添加 `WB_SIGNIN_ENABLED`，值 `true`。在 Actions 中启用工作流（fork 的 Actions 可能默认停用）。手动运行 **WorkBuddy Cloud Checkin**，先保持 `check_only=true`；此模式仅查询签到，但仍刷新并保存授权。确认返回 `CHECKED` 后，再手动取消该选项进行首次领取。定时触发自动执行领取。
+在 Actions 中启用工作流（fork 的 Actions 可能默认停用）。手动运行 **WorkBuddy Cloud Checkin**，先保持 `check_only=true`；此模式仅查询签到，但仍刷新并保存授权，且不需要开启领取变量。确认返回 `CHECKED`、并决定启用领取后，才在仓库 Settings → Secrets and variables → Actions → Variables 添加 `WB_SIGNIN_ENABLED`，值 `true`。然后可手动取消查询选项进行首次领取，定时触发也会自动执行领取。
 
 配置 Secrets 与启用定时任务是两个独立步骤。代码测试不包含真实账号请求，首次云端验收仍需上述步骤。
 
