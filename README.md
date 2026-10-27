@@ -1,3 +1,5 @@
+> **本 fork 新增：GitHub Actions 云端签到，无需安装 WorkBuddy / CodeBuddy。** 配置、授权与限制见 [CLOUD_ACTIONS.md](CLOUD_ACTIONS.md)。原版桌面用法保留在下文；云端入口默认关闭，须自行授权并启用。
+
 <div align="center">
 
 <img src="assets/cover.jpg" alt="workbuddy-auto-signin —— WorkBuddy / Qoder CN 自动领取脚本" width="100%">
